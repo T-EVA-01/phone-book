@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    ul(class='container-fluid')
+        each person in person_list
+            li.card-of-person(class='row')
+                .data-of-person(class='col-sm-10') 
+                    .name-of-person #{person.name}
+                    .data-group
+                        .date-of-birth
+                            span Date of birth:     
+                            |  #{person.date_of_birth_formatted}
+                        .age-of-the-person 
+                            span Age: 
+                            |  #{person.age}
+                        .phone-number 
+                            span Phone number: 
+                            |  +#{person.phone_number}
+                        .sity 
+                            span Sity: 
+                            |  #{person.sity}
+                        .addres 
+                            span Addres: 
+                            |  #{person.addres} #{person.house_number}-#{person.apartment_number}
+            hr
