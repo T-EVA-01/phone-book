@@ -1,8 +1,47 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.nav-link {
+  color: white;
+  display: block;
+  padding: .5rem 1rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.sidebar-nav {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.name-of-person {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.data-of-person span {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.data-group {
+  margin-left: 20px;
 }
