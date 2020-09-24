@@ -1,0 +1,45 @@
+extends layout
+
+block content 
+    h1= title
+
+    form(method="POST" action='')
+        div.form-row
+            div.form-group(class='col-md-4')
+                label(for='first_name') First Name:
+                input#first_name.form-control(type='text' placeholder='First name' name='first_name' required='true' value=(undefined===person ? '' : person.first_name) )
+            div.form-group(class='col-md-4')    
+                label(for='family_name') Family Name:
+                input#family_name.form-control(type='text' placeholder='Family name' name='family_name' required='true' value=(undefined===person ? '' : person.family_name) )
+            div.form-group(class='col-md-4')    
+                label(for='middle_name') Middle Name:
+                input#middle_name.form-control(type='text' placeholder='Middle name' name='middle_name' required='true' value=(undefined===person ? '' : person.middle_name) )
+        div.form-row
+            div.form-group(class='col-md-8')   
+                label(for='date_of_birth') Date of birth:
+                input#date_of_birth.form-control(type='date' name='date_of_birth' value=(undefined===person ? '' : person.date_of_birth) )
+            div.form-group(class='col-md-4')     
+                label(for='age') Age:
+                input#age.form-control(type='text' placeholder='Age' name='age' required='true' value=(undefined===person ? '' : person.age) )
+        div.form-column     
+            div.form-group(class='col-md-12')    
+                label(for='phone_number') Phone number:
+                input#phone_number.form-control(type='text' placeholder='Phone number' name='phone_number' required='true' value=(undefined===person ? '' : person.phone_number) )
+        div.form-row        
+            div.form-group(class='col-md-4')     
+                label(for='sity') Sity:
+                input#sity.form-control(type='text' placeholder='Sity' name='sity' required='true' value=(undefined===person ? '' : person.sity) )
+            div.form-group(class='col-md-4')     
+                label(for='addres') Addres:
+                input#sity.form-control(type='text' placeholder='Addres' name='addres' required='true' value=(undefined===person ? '' : person.addres) )
+            div.form-group(class='col-md-2')     
+                label(for='house_number') House number:
+                input#house_number.form-control(type='text' placeholder='House number' name='house_number' required='true' value=(undefined===person ? '' : person.house_number) )
+            div.form-group(class='col-md-2')     
+                label(for='apartment_number') Apartment number:
+                input#apartment_number.form-control(type='text' placeholder='Apartment number' name='apartment_number' required='true' value=(undefined===person ? '' : person.apartment_number) )
+        button.btn.btn-primary(type='submit') Submit
+    if errors 
+        ul
+            for error in errors
+                li!= error.msg
