@@ -1,6 +1,7 @@
 const Person = require('../models/person');
 const {body, validationResult} = require('express-validator');
 const {sanitizeBody} = require('express-validator');
+const async = require('async');
 
 exports.person_list = function(req, res, next) {
     Person.find()
@@ -60,3 +61,35 @@ exports.person_create_post = [
     }
 
 ];
+
+exports.person_delete_get = function(req, res, next) {
+    console.log(req.params);
+    async.parallel({
+        person: function(callback) {
+            Person.findById(req.params.id).exec(callback)
+        }
+    }, function(err, results) {
+        if(err) {return next(err);}
+        if(results.person === null) {
+            res.redirect('/catalog')
+        };
+        // console.log(results);
+        res.render('person_delete', {title: 'Delete Person', person: results.person})
+    })
+};
+
+exports.person_delete_post = function(req, res, next) {
+    async.parallel({
+        person: function(callback) {
+            Person.findById(req.body.personid).exec(callback)
+        }
+    }, function(err, results) {
+        if(err) { return next(err); }
+        else {
+            Person.findByIdAndRemove(req.body.personid, function deletePerson(err) {
+                if(err) { return next(err); }
+                res.redirect('/catalog')
+            })
+        };
+    })
+};

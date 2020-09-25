@@ -22,4 +22,7 @@ block content
                         .addres 
                             span Addres: 
                             |  #{person.addres} #{person.house_number}-#{person.apartment_number}
+                .links(class='col-sm-2') 
+                    p
+                        a(href=person.url+'/delete') Delete person
             hr

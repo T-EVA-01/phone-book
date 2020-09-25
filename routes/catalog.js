@@ -9,4 +9,8 @@ router.get('/person/create', person_controller.person_create_get);
 
 router.post('/person/create', person_controller.person_create_post);
 
+router.get('/person/:id/delete', person_controller.person_delete_get);
+
+router.post('/person/:id/delete', person_controller.person_delete_post);
+
 module.exports = router
