@@ -13,4 +13,8 @@ router.get('/person/:id/delete', person_controller.person_delete_get);
 
 router.post('/person/:id/delete', person_controller.person_delete_post);
 
+router.get('/person/:id/update', person_controller.person_update_get);
+
+router.post('/person/:id/update', person_controller.person_update_post);
+
 module.exports = router
