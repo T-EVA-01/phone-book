@@ -51,8 +51,8 @@ exports.person_create_post = [
         .isISO8601().toDate(),
     body('age').isLength({min: 2}).trim()
         .isNumeric().withMessage('Age non-numeric characters.').escape(),
-    body('phone_number').isLength({min: 10}).trim().isNumeric().withMessage('Age non-numeric characters.')
-        .isMobilePhone('ru-RU').withMessage('Phone number must be +7(000)0000000').escape(),
+    body('phone_number').trim().isMobilePhone('ru-RU')
+        .withMessage('Phone number must be 79xxxxxxxxx').escape(),
     body('sity').isLength({min: 3}).trim().custom(value => {
         for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
             if (!body('sity').isAlpha(value[charIdx], 'ru-RU')
@@ -193,8 +193,8 @@ exports.person_update_post = [
         .isISO8601().toDate(),
     body('age').isLength({min: 2}).trim()
         .isNumeric().withMessage('Age non-numeric characters.').escape(),
-    body('phone_number').isLength({min: 10}).trim().isNumeric().withMessage('Age non-numeric characters.')
-        .isMobilePhone('ru-RU').withMessage('Phone number must be +7(000)0000000').escape(),
+    body('phone_number').trim().isMobilePhone('ru-RU')
+        .withMessage('Phone number must be 79xxxxxxxxx').escape(),
     body('sity').isLength({min: 3}).trim().custom(value => {
         for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
             if (!body('sity').isAlpha(value[charIdx], 'ru-RU')
