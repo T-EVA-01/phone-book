@@ -16,19 +16,65 @@ exports.person_create_get = function(req, res, next) {
     res.render('person_form', {title: 'Create Person'});
 }
 
+
+
 exports.person_create_post = [
 
-    body('first_name').isLength({min: 3}).trim().isAlpha().withMessage('First name non-alpha characters.').escape(),
-    body('family_name').isLength({min: 3}).trim().isAlpha().withMessage('Family name non-alpha characters.').escape(),
-    body('middle_name').isLength({min: 3}).trim().isAlpha().withMessage('Middle name non-alpha characters.').escape(),
-    body('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true}).isISO8601().toDate(),
-    body('age').isLength({min: 2}).trim().isNumeric().withMessage('Age non-numeric characters.').escape(),
+    body('first_name').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('first_name').isAlpha(value[charIdx], 'ru-RU')
+             && !body('first_name').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal first name'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('family_name').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('family_name').isAlpha(value[charIdx], 'ru-RU')
+             && !body('family_name').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal family name'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('middle_name').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('middle_name').isAlpha(value[charIdx], 'ru-RU')
+             && !body('middle_name').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal middle name'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true})
+        .isISO8601().toDate(),
+    body('age').isLength({min: 2}).trim()
+        .isNumeric().withMessage('Age non-numeric characters.').escape(),
     body('phone_number').isLength({min: 10}).trim().isNumeric().withMessage('Age non-numeric characters.')
         .isMobilePhone('ru-RU').withMessage('Phone number must be +7(000)0000000').escape(),
-    body('sity').isLength({min: 3}).trim().isAlpha().withMessage('Sity non-alpha characters.').escape(),
-    body('addres').isLength({min: 1}).trim().withMessage('Addres non-alpha characters.').escape(),
-    body('house_number').isLength({min: 1}).trim().isNumeric().withMessage('House number non-numeric charecters.').escape(),
-    body('apartment_number').isLength({min: 1}).trim().isNumeric().withMessage('Apartment number non-numeric charecters.').escape(),
+    body('sity').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('sity').isAlpha(value[charIdx], 'ru-RU')
+             && !body('sity').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal sity'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('addres').isLength({min: 1}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('addres').isAlpha(value[charIdx], 'ru-RU')
+             && !body('addres').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal addres'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('house_number').isLength({min: 1}).trim().isNumeric()
+        .withMessage('House number non-numeric charecters.').escape(),
+    body('apartment_number').isLength({min: 1}).trim().isNumeric()
+        .withMessage('Apartment number non-numeric charecters.').escape(),
 
     (req, res, next) => {
         
@@ -111,19 +157,66 @@ exports.person_update_get = function(req, res, next) {
     })
 };
 
+
+
+
 exports.person_update_post = [
 
-    body('first_name').isLength({min: 3}).trim().isAlpha().withMessage('First name non-alpha characters.').escape(),
-    body('family_name').isLength({min: 3}).trim().isAlpha().withMessage('Family name non-alpha characters.').escape(),
-    body('middle_name').isLength({min: 3}).trim().isAlpha().withMessage('Middle name non-alpha characters.').escape(),
-    body('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true}).isISO8601().toDate(),
-    body('age').isLength({min: 2}).trim().isNumeric().withMessage('Age non-numeric characters.').escape(),
+    body('first_name').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('first_name').isAlpha(value[charIdx], 'ru-RU')
+             && !body('first_name').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal first name'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('family_name').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('family_name').isAlpha(value[charIdx], 'ru-RU')
+             && !body('family_name').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal family name'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('middle_name').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('middle_name').isAlpha(value[charIdx], 'ru-RU')
+             && !body('middle_name').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal middle name'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true})
+        .isISO8601().toDate(),
+    body('age').isLength({min: 2}).trim()
+        .isNumeric().withMessage('Age non-numeric characters.').escape(),
     body('phone_number').isLength({min: 10}).trim().isNumeric().withMessage('Age non-numeric characters.')
         .isMobilePhone('ru-RU').withMessage('Phone number must be +7(000)0000000').escape(),
-    body('sity').isLength({min: 3}).trim().isAlpha().withMessage('Sity non-alpha characters.').escape(),
-    body('addres').isLength({min: 1}).trim().withMessage('Addres non-alpha characters.').escape(),
-    body('house_number').isLength({min: 1}).trim().isNumeric().withMessage('House number non-numeric charecters.').escape(),
-    body('apartment_number').isLength({min: 1}).trim().isNumeric().withMessage('Apartment number non-numeric charecters.').escape(),
+    body('sity').isLength({min: 3}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('sity').isAlpha(value[charIdx], 'ru-RU')
+             && !body('sity').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal sity'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('addres').isLength({min: 1}).trim().custom(value => {
+        for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+            if (!body('addres').isAlpha(value[charIdx], 'ru-RU')
+             && !body('addres').isAlpha(value[charIdx], 'en-US')) {
+              throw new Error('Illegal addres'); 
+            }   
+        }
+        return true;
+      }).escape(),
+    body('house_number').isLength({min: 1}).trim().isNumeric()
+        .withMessage('House number non-numeric charecters.').escape(),
+    body('apartment_number').isLength({min: 1}).trim().isNumeric()
+        .withMessage('Apartment number non-numeric charecters.').escape(),
 
     (req, res, next) => {
 
