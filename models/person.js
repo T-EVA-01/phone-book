@@ -33,11 +33,17 @@ PersonSchema
     return `/catalog/person/${this._id}`;
 });
 
-// Виртуальное свойство, необходимое для того, чтобы привести дату рождения в более удобочитаемый формат
+// Виртуальные свойства, необходимые для того, чтобы привести дату рождения в более удобочитаемый формат
 PersonSchema
 .virtual('date_of_birth_formatted')
 .get(function() {
-    return moment(this.date_of_birth).format('MMMM Do, YYYY');
+    return moment(this.date_of_birth).format('YYYY-MM-DD');
+});
+
+PersonSchema
+.virtual('date_of_birth_formatted_reverse')
+.get(function() {
+    return moment(this.date_of_birth).format('DD.MM.YYYY');
 });
 
 module.exports = mongoose.model('Person', PersonSchema)
